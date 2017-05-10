@@ -1,6 +1,9 @@
 var myApp=angular.module( 'myApp', [] );
+
 myApp.controller( 'WhereMyPeeps', function( $http ){
+
   var vm = this;
+
   vm.addRecord = function(){
     var objectToSend ={
     name: vm.nameIn,
@@ -16,14 +19,15 @@ myApp.controller( 'WhereMyPeeps', function( $http ){
   };//end of addRecord function
 
   vm.getRecords = function(){
-    $.http({
+    $http({
     method: 'GET',
     url: '/getRecords',
-  }).then( function success (response ){
-    vm.allTheRecords = response;
-    console.log( vm.allTheRecords );
-    }), function myError( response ){
-    console.log( response.statusText );
-  };//end of get
- };//end of getRecords function
+    }).then( function success (response ){
+      vm.allTheRecords = response.data;
+      console.log( vm.allTheRecords );
+    });
+      // , function myError( response ){
+    //   console.log( response.statusText );
+    // });//end of get
+  };//end of getRecords function
 });//end of contoller

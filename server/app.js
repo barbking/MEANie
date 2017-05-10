@@ -29,6 +29,7 @@ app.listen( 8080, 'localhost', function( req, res ){
 });
 
 app.get( '/getRecords', function( req, res ){
+  console.log ('getRecords', res);
   // get and send back all the things
   ourModel.find().then( function( data ){
   res.send( data );
@@ -46,4 +47,5 @@ app.post( '/testPost', function( req, res ){
   // create new record
   var newRecord=ourModel( recordToAdd );
   newRecord.save();
+  console.log(newRecord);
 });//end post
