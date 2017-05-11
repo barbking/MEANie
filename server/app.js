@@ -13,7 +13,7 @@ var ourSchema = mongoose.Schema({
   location: String
 });
 //model
-var ourModel = mongoose.model( 'ourModel', ourSchema );
+var ourModel = mongoose.model( 'ourModels', ourSchema );
 
 //uses
 app.use( bodyParser.json() );
@@ -49,3 +49,12 @@ app.post( '/testPost', function( req, res ){
   newRecord.save();
   console.log(newRecord);
 });//end post
+
+
+app.delete( '/deleteRecords/:id', function( req, res ){
+  console.log('req.params to delete->', req.params.id);
+  var id = req.params.id;
+  ourModel.remove({_id: id}).then(function(){
+    res.send(200);
+  });
+});
